@@ -1,20 +1,21 @@
 <template>
 	<div>
 
-			<div id="output">
-				<h2>{{outputnumbutvalue}}</h2>
-                </div>
-                <div class="row">
-				<div class="col-4" v-for="button in buttons" :key="button.id">
-					<numbutComponent
-						v-bind:numbutid="button.id"
-						v-bind:numbutvalue="button.value"
-						v-on:onClickedButton="outputnumbutValue"
-					></numbutComponent>
-				</div>
-                </div>
-                <button id="clear" size="lg" @click="clearAll()">C</button>
-			</div>
+        <div id="output">
+            <h2>{{getOutput}}</h2>
+        </div>
+        <div class="row">
+            <div class="col-4" v-for="button in buttons" :key="button.id">
+                <numbutComponent
+                    v-bind:numbutid="button.id"
+                    v-bind:numbutvalue="button.value"
+                    v-on:onClickedButton="updateOutput"
+                ></numbutComponent>
+            </div>
+        </div>
+        <button id="clear" size="lg" @click="clearAll()">C</button>
+        <button id="equal" size="lg" @click="evalAll()">=</button>
+    </div>
 
 </template>
 
@@ -32,35 +33,61 @@
 		data() {
 			return {
 				buttons: [
-					{ id: 0, value: 0 },
-					{ id: 1, value: 1 },
-					{ id: 2, value: 2 },
-					{ id: 3, value: 3 },
-					{ id: 4, value: 4 },
-					{ id: 5, value: 5 },
-					{ id: 6, value: 6 },
-					{ id: 7, value: 7 },
-					{ id: 8, value: 8 },
-					{ id: 9, value: 9 },
-					{ id: 10, value: 10 },
+					{ id: 0, value: "0" },
+					{ id: 1, value: "1" },
+					{ id: 2, value: "2" },
+					{ id: 3, value: "3" },
+					{ id: 4, value: "4" },
+					{ id: 5, value: "5" },
+					{ id: 6, value: "6" },
+					{ id: 7, value: "7" },
+					{ id: 8, value: "8" },
+					{ id: 9, value: "9" },
+					{ id: 10, value: "10" },
 					{ id: 11, value: "+" },
 					{ id: 12, value: "*" },
 					{ id: 13, value: "-" },
-					{ id: 14, value: "/" }
+                    { id: 14, value: "/" },
+                
 				],
-				outputnumbutvalue: "                 "
+				output: []
 			};
 		},
 		components: {
 			numbutComponent
 		},
 		methods: {
-			clearAll() {
+			clearAll: function () {
 				// clear button
-				this.output.value = "";
+				this.output= [];
+            },
+            updateOutput: function (obj){
+                console.log(obj);
+                var num = this.isnumber(obj.value);
+                console.log(num);
+                this.output.push(num);
+            },
+            isnumber(num) {
+                // if is not a number: +, -, *, /
+                // return 
+				if (isNaN(num) == false) {
+					return parseInt(num);
+				}
+				return num;
 			}
 		},
 		computed: {
+            getOutput() {
+              return  this.output.join("");
+            },
+
+            evalAll() {
+                var val= eval(this.output.join(""));
+                this.output=[];
+                this.updateOutput({value:val});
+            }
+            
+			
 			
 			
         },
@@ -69,3 +96,12 @@
         }
 	};
 </script>
+<style scoped>
+        #output{
+                
+                border:1px solid black;
+                height:35px;
+                margin:30px;
+        
+            }
+        </style>

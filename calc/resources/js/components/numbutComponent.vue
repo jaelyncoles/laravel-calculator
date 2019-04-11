@@ -15,22 +15,17 @@
 		},
 		data() {
 			return {
-				outputnumbutvalue: "",
-				beenClicked: false
+				
+				
 			};
 		},
 		methods: {
 			click() {
-				this.$emit("onClickedButton", { id: this.numbutid });
+                this.$emit("onClickedButton", { value:this.numbutvalue});
 			}
 		},
 		computed: {
-			isnumber() {
-				if (isNaN(this.numbutvalue) == false) {
-					this.numbutvalue = parseInt(this.numbutvalue);
-				}
-				return this.numbutvalue;
-			}
+			
 		}
 	};
 </script>
