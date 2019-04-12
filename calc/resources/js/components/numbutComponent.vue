@@ -1,8 +1,10 @@
 <template>
 	<div>
+        <div id="buttons">
 		<div id="button">
 			<button size="lg" @click="click()">{{ numbutvalue }}</button>
 		</div>
+	</div>
 	</div>
 </template>
 
@@ -29,3 +31,9 @@
 		}
 	};
 </script>
+<style>
+#buttons{
+             text-align: center;
+                
+            }
+</style>

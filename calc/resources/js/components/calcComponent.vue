@@ -1,5 +1,6 @@
 <template>
 	<div>
+        <div id="whole">
 
         <div id="output">
             <h2>{{getOutput}}</h2>
@@ -13,8 +14,11 @@
                 ></numbutComponent>
             </div>
         </div>
+        <div id="extra">
         <button id="clear" size="lg" @click="clearAll()">C</button>
         <button id="equal" size="lg" @click="evalAll()">=</button>
+        </div>
+        </div>
     </div>
 
 </template>
@@ -43,11 +47,10 @@
 					{ id: 7, value: "7" },
 					{ id: 8, value: "8" },
 					{ id: 9, value: "9" },
-					{ id: 10, value: "10" },
-					{ id: 11, value: "+" },
-					{ id: 12, value: "*" },
-					{ id: 13, value: "-" },
-                    { id: 14, value: "/" },
+					{ id: 10, value: "+" },
+					{ id: 11, value: "*" },
+					{ id: 12, value: "-" },
+                    { id: 13, value: "/" },
                 
 				],
 				output: []
@@ -104,4 +107,21 @@
                 margin:30px;
         
             }
+
+            #whole{
+                border:2px solid black;
+                height:50%;
+                width:25%;
+                margin-left:35%;
+                margin-top:20%;
+            }
+
+        #extra{
+                text-align: right;
+                padding-right:5%;
+                padding-bottom:10%;
+                
+                
+            }
+        
         </style>
